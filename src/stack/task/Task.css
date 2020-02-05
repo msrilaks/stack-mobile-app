@@ -1,0 +1,41 @@
+.task-container {
+    margin-bottom: 30px;
+}
+
+.task-buttons {
+    float: right;
+    text-align: right;
+    padding-top: 10px;
+}
+
+.task-delete{
+    padding-left: 6px;
+}
+.task-details{
+    padding-top: 10px;
+}
+
+.task-label{
+    font-style: italic;
+    font-size: 15px;
+    font-family: monospace;
+    color: gray;
+}
+
+.task-description{
+    font-style: italic;
+    font-size: 15px;
+    font-family: monospace;
+    color: black;
+}
+
+.task-button-panel {
+    float: right;
+}
+.task {
+    width: 100%;
+    height: 150px;
+    margin-top: 10px;
+    border-color: gainsboro;
+    border-style: double;
+}
