@@ -5,3 +5,12 @@
 .s-alert-close::before, .s-alert-close::after {
     width: 2px;
 }
+
+.app-top-box {
+    height: 57px;
+}
+
+.app-body {
+    background-image: url("/stackBkgM.jpg");
+    min-height: calc(100vh);
+}

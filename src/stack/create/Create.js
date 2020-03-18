@@ -39,6 +39,11 @@ import 'react-multi-email/style.css';
 import Autocomplete from 'react-google-autocomplete';
 
 const useStyles = makeStyles(theme => ({
+    taskInputProps: {
+        fontSize: '13px',
+        fontFamily: "Sans Serif",
+        color: '#BDBDBD',
+      },
     chipContainer: {
         display: 'flex',
         float: 'right',
@@ -54,7 +59,6 @@ const useStyles = makeStyles(theme => ({
     },
     emailContainer: {
         display: 'flex',
-        paddingTop: '20px',
         maxRows: '2',
         flexWrap: 'wrap',
         '& > *': {
@@ -78,9 +82,6 @@ const useStyles = makeStyles(theme => ({
     fontFamily: 'cursive',
     textTransform: 'capitalize',
     fontSize: 'medium',
-  },
-  taskDetail: {
-    fontSize: '1rem',
   },
     taskButtonPanel: {
         marginLeft: 'auto',
@@ -142,6 +143,9 @@ class Create extends Component {
             stackId: '',
             tags: '',
             description: '',
+            formattedAddress: 'Enter Task Location',
+            placeId: '',
+            location: {},
             userId: '',
             createdByUserId:'',
             createdDate: ''
@@ -186,6 +190,7 @@ class Create extends Component {
                 userId:this.props.stack.userId,
                 tags:this.props.task.tags,
                 createdByUserId:this.props.stack.userId,
+                formattedAddress:this.props.task.formattedAddress,
                 description:this.props.task.description,
         }
             },function () {
@@ -380,9 +385,9 @@ class Create extends Component {
     let UploadPanel  =  (
                 <div className={classes.grid}>
                     <GridList cellHeight={'auto'} className={classes
-                    .gridList} cols={4}>
-                        <GridListTile key="dropzone" cols={4} style={{ height:
-                                                'auto', paddingBottom:'20px'}}>
+                    .gridList} cols={2}>
+                        <GridListTile key="dropzone" cols={2} style={{ height:
+                                                'auto', paddingBottom:'20px',borderRadius: '.2rem'}}>
                             <Dropzone onDrop={this.onDrop}>
                                 {({getRootProps, getInputProps}) => (
                                 <StyledSection className="container">
@@ -483,13 +488,24 @@ class Create extends Component {
 
 
             <Typography variant="body1" color="textSecondary" component="p"
-            style={{ }}
-            className={classes.taskDetail}>
+            style={{width: '100%',
+                                           marginTop: '30px',
+                                               marginLeft: '0px',
+                                               marginRight: '0px',
+                                               marginBottom: '0px',}}
+            className={classes.taskInputProps}>
                     <TextField
                     id="standard-multiline-flexible"
+                    style={{marginBottom: '0px'}}
+                    inputProps={{style: {fontSize: '15px',
+                                                 fontFamily: "Sans Serif",}}} // font size of input text
+                    InputLabelProps={{style: {fontSize: '15px',
+                                                      fontFamily: "Sans Serif",
+                                                      color: '#BDBDBD',}}} // font size of input label
                     label="description"
                     multiline
                     fullWidth
+                    variant="outlined"
                     rowsMax="4"
                     name="description"
                     value={this.state.task.description} onChange={this.handleInputChange} required
@@ -497,17 +513,56 @@ class Create extends Component {
                     />
             </Typography>
              <div>
+             <Typography variant="body1" color="textSecondary" component="p"
+                         style={{width: '100%',
+                               marginTop: '30px',
+                                   marginLeft: '0px',
+                                   marginRight: '0px',
+                                   marginBottom: '0px',}}
+                         className={classes.taskInputProps}>
              <Autocomplete
-                 style={{width: '100%',marginTop: '20px',height: '35px'}}
+                 style={{width: '100%',height: '38px',border: '1px solid #dcdcdc',borderRadius: '.2rem',
+                 padding: '14px'}}
+                 placeholder={this.state.task.formattedAddress}
+                 InputProps={{
+                         className: classes.taskInputProps
+                       }}
+                 InputLabelProps={{style: {fontSize: '15px',
+                       fontFamily: "Sans Serif",
+                       color: '#BDBDBD',}}} // font size of input label
                  onPlaceSelected={(place) => {
-                   console.log(place);
+                 console.log(place);
+                 this.setState({
+                                     task:{
+                                         ...this.state.task,
+                                     placeId: place.place_id,
+                                     formattedAddress: place.formatted_address,
+                                     location: place.geometry.location
+                                     }
+                                 },function () {
+                                     console.log("Location "
+                                     + this.state.task.location);
+                             });
                  }}
                  types={['establishment']}
              />
+             </Typography>
              </div>
             <div className={classes.emailContainer}>
+            <Typography variant="body1" color="textSecondary" component="p"
+                                     style={{width: '100%',
+                                      marginTop: '30px',
+                                          marginLeft: '0px',
+                                          marginRight: '0px',
+                                          marginBottom: '0px',}}
+                                     className={classes.taskInputProps}>
              <ReactMultiEmail
                        placeholder="push to @emails"
+                       style={{margin: '0px',color: '#bdbdbd',border: '1px solid #dcdcdc',borderRadius: '.2rem',width: '100%',
+                       height: '38px'}}
+                       InputLabelProps={{style: {fontSize: '15px',
+                             fontFamily: "Sans Serif",
+                             color: '#BDBDBD',}}} // font size of input label
                        emails={this.state.emails}
                        onChange={(_emails: string[]) => {
                          this.setState({ emails: _emails });
@@ -530,7 +585,7 @@ class Create extends Component {
                          );
                        }}
                      />
-
+</Typography>
             </div>
 
             {UploadPanel}

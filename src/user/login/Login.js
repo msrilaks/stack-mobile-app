@@ -7,6 +7,7 @@ import googleLogo from '../../img/google-logo.png';
 import githubLogo from '../../img/github-logo.png';
 import Alert from 'react-s-alert';
 import {config} from '../../constants';
+import Container from '@material-ui/core/Container';
 
 class Login extends Component {
     componentDidMount() {
@@ -35,19 +36,19 @@ class Login extends Component {
         }
 
         return (
-            <div className="login-container">
-                <div class="fadein">
-                    <img id="f2" src="/stackHome1M.jpg" />
-                    <img id="f1" src="/stackHome2M.jpg"/>
-                </div>
-                <SocialLogin id="f3" class="centered"/>
-                    {/* <div className="or-separator">
-                        <span className="or-text">OR</span>
-                    </div>
-                    <LoginForm {...this.props} /> */}
-                    {/* <span className="signup-link">New user? <Link to="/signup">Sign up!</Link></span> */}
-
-            </div>
+        <div  class="login-container">
+                  <Container maxWidth="sm" class="fadein">
+                <img id="f2" src="/stackHome1M.jpg" />
+                <img id="f1" src="/stackHome2M.jpg"/>
+                                <p id="f3" class="centered"></p>
+                       <SocialLogin id="f3" class="centered"/>
+                       {/* <div className="or-separator">
+                                               <span className="or-text">OR</span>
+                                           </div>
+                                           <LoginForm {...this.props} /> */}
+                                           {/* <span className="signup-link">New user? <Link to="/signup">Sign up!</Link></span> */}
+                  </Container>
+        </div>
         );
     }
 }
@@ -59,9 +60,11 @@ class SocialLogin extends Component {
                 <a className="btn btn-block social-btn"
                 href={config
                 .GOOGLE_AUTH_URL}>
-                <img id="f4" src={googleLogo} alt="Google"
-                style={{marginTop: "5px"}}/>Log in with
-                Google</a>
+                <img id="f5" src={googleLogo} alt="Google"
+                style={{top:'35%',
+                    left:'8%',
+                    animationName:'none',
+                    position:'relative'}}/>Log in with Google</a>
                 {/*<a className="btn btn-block social-btn facebook"
                 href={FACEBOOK_AUTH_URL}>
                     <img src={fbLogo} alt="Facebook" /> Log in with Facebook</a>

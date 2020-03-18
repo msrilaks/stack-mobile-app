@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './Home.css';
-
+import Container from '@material-ui/core/Container';
 class Home extends Component {
     constructor() {
         super();
@@ -8,17 +8,12 @@ class Home extends Component {
     }
 
     StackHome(){
-        if(window.screen.width < 480){
-                //code for mobile
-                return <div class="fadein">
-                    <img id="f2" src="/stackHome1XS.jpg" />
-                    <img id="f1" src="/stackHome2XS.jpg"/>
-                    <p id="f3" class="centered"></p>
-                </div>}
-        return <div class="fadein">
-            <img id="f2" src="/stackHome1M.jpg" />
-            <img id="f1" src="/stackHome2M.jpg"/>
-            <p id="f3" class="centered"></p>
+    return <div  class="home-container">
+          <Container maxWidth="sm" class="fadein">
+                <img id="f2" src="/stackHome1M.jpg" />
+                <img id="f1" src="/stackHome2M.jpg"/>
+                <p id="f3" class="centered"></p>
+          </Container>
         </div>
     }
 
